@@ -1,0 +1,17 @@
+def print_all(s,output):
+    if len(s)==0:
+        print(output)
+        return
+    
+    
+    c1=chr(int(s[0])+96)
+    print_all(s[1:],output+c1)
+    
+    if len(s)>=2:
+        c2=chr(int(s[0:2])+96)
+        if 'j'<=c2<='z':
+            print_all(s[2:],output+c2)
+  
+s=input()
+output=''
+print_all(s,output)
