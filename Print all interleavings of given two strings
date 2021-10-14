@@ -1,0 +1,16 @@
+
+def inter(s1,s2,prev):
+    global total_len
+    n=len(s1)
+    if(len(s1)==total_len):
+        print(s1)
+    else:
+        for j in range(len(s2)):
+            for i in range(n,prev,-1):
+                new_s1=s1[:i]+s2[j]+s1[i:]
+                new_s2=s2[j+1:]
+                new_prev=i
+                inter(new_s1,new_s2,new_prev)
+
+total_len=6
+inter('abcd','ef',-1)
