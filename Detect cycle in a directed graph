@@ -1,0 +1,24 @@
+class Solution:
+    def DFSutil(self,v,adj,i,color):
+        color[i]="GREY"
+        for j in adj[i]:
+            if color[j]=="GREY":
+                return True
+            if color[j]=="WHITE" and Solution().DFSutil(v,adj,j,color):
+                return True
+        color[i]="BLACK"
+        return False
+        
+    
+    #Function to detect cycle in a directed graph.
+    def isCyclic(self,v,adj):
+        # code here
+        color=["WHITE" for i in range(v)]
+        
+        for i in range(v):
+            if color[i]=="WHITE" and Solution().DFSutil(v,adj,i,color):
+                    #print(color,i)
+                    return True
+        #print("hi")
+        
+        return False
