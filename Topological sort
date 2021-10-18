@@ -1,0 +1,17 @@
+class Solution:
+    
+    #Function to return list containing vertices in Topological order.
+    def topoutil(self,i,visited,stack,adj):
+        visited[i]=True
+        for j in adj[i]:
+            if visited[j]==False:
+                Solution().topoutil(j,visited,stack,adj)
+        stack.append(i)
+    def topoSort(self, V, adj):
+        # Code here
+        visited=[False for i in range(V)]
+        stack=[]
+        for i in range(V):
+            if visited[i]==False:
+                Solution().topoutil(i,visited,stack,adj)
+        return stack[::-1]
