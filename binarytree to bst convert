@@ -1,0 +1,28 @@
+class Solution:
+    # The given root is the root of the Binary Tree
+    # Return the root of the generated BST
+    k=0
+    def fill(self,root,temp):
+        global k
+        if not root:
+            return
+        Solution().fill(root.left,temp)
+        root.data=temp[k]
+        k+=1
+        Solution().fill(root.right,temp)
+        
+    def inorder(self,root,temp):
+        if not root:
+            return 
+        Solution().inorder(root.left,temp)
+        temp.append(root.data)
+        Solution().inorder(root.right,temp)
+    def binaryTreeToBST(self, root):
+        # code here
+        global k
+        k=0
+        temp=[]
+        Solution().inorder(root,temp)
+        temp.sort()
+        Solution().fill(root,temp)
+        return root
