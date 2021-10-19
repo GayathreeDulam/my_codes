@@ -1,0 +1,17 @@
+class Solution:
+    def givepath(self,root,temp,curr):
+        if not root:
+            return
+        if root.left is None and root.right is None:
+            curr+=str(root.val)
+            temp.append(curr)
+            return
+        curr+=str(root.val)+'->'
+        Solution().givepath(root.left,temp,curr)
+        Solution().givepath(root.right,temp,curr)
+        
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        temp=[]
+        curr=''
+        Solution().givepath(root,temp,curr)
+        return temp
