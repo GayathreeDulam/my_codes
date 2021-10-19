@@ -1,0 +1,18 @@
+count=0
+def findleaves(root):
+    global count
+    if not root:
+        return
+    if root.left is None and root.right is None:
+        count+=1
+        return
+    findleaves(root.left)
+    findleaves(root.right)
+    
+        
+def countLeaves(root):
+    # Code here
+    global count
+    count=0
+    findleaves(root)
+    return count
