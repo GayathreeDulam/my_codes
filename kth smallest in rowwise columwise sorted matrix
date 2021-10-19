@@ -1,0 +1,24 @@
+def count(mat,mid,k,n):
+    count=0
+    j=n-1
+    for i in range(n):
+        for j in range(j,-1,-1):
+            if(mat[i][j]<=mid):
+                count+=j+1
+                break
+    return count
+def kthSmallest(mat, n, k): 
+    # Your code goes here
+    low=mat[0][0]
+    high=mat[n-1][n-1]
+    mid=(low+high)//2
+    
+    while(low<high):
+        mid=(low+high)//2
+        curr=count(mat,mid,k,n)
+        #print(low,high,mid,curr)
+        if(count(mat,mid,k,n)<k):
+            low=mid+1
+        elif(count(mat,mid,k,n)>=k):
+            high=mid
+    return low
