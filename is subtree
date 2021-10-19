@@ -1,0 +1,62 @@
+1)         O(N2) OWN GFG SOLUTION
+class Solution:
+    def isSame(self,T,S):
+        if (T is None) and (S is None):
+            return True
+        if (T is None) or (S is None):
+            return False 
+        if T.data==S.data and Solution().isSame(T.left,S.left) and Solution().isSame(T.right,S.right):
+            return True
+        return False
+            
+    def isSubTree(self,T,S):
+        if S is None:
+            return True
+        if T is None:
+            return False
+            
+        if Solution().isSame(T,S):
+            return True
+        left=Solution().isSubTree(T.left,S)
+        right=Solution().isSubTree(T.right,S)
+        if left or right:
+            return True
+        return False
+        
+        
+ 2)     o(N) but space consumed SOLUTION
+ class Solution:
+    def issubarray(self,a,b):
+        m=len(a)
+        n=len(b)
+        for i in range(n):
+            #print(a,b[i:i+m])
+            if a==b[i:i+m]:
+                return True
+        return False
+    def inorder(self,root,temp):
+        if not root:
+            temp.append('null')
+            return
+        Solution().inorder(root.left,temp)
+        temp.append(root.data)
+        Solution().inorder(root.right,temp)
+    def preorder(self,root,temp):
+        if not root:
+            temp.append('null')
+            return
+        temp.append(root.data)
+        Solution().preorder(root.left,temp)
+        Solution().preorder(root.right,temp)
+    def isSubTree(self, T, S):
+        # Code here
+        inT,preT,inS,preS=[],[],[],[]
+        Solution().inorder(T,inT)
+        Solution().preorder(T,preT)
+        Solution().inorder(S,inS)
+        Solution().preorder(S,preS)
+        #print(inS,inT)
+        #print(preS,preT)
+        if Solution().issubarray(inS,inT) and Solution().issubarray(preS,preT):
+            return True
+        return False
