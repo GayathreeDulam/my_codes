@@ -1,0 +1,28 @@
+1.    MOST EFFICIENT SOLUTION THAN 2,USING LEVEL ORDER TRAVERSAL,1ST ENCOUNTERED LEAF'S DEPTH
+  class Solution:
+      def minDepth(self, root):
+          #Code here
+          q=[]
+          q.append([root,1])
+          while(q):
+              curr=q.pop(0)
+              if (curr[0].left is None) and (curr[0].right is None):
+                  return curr[1]
+              if curr[0].left:
+                  q.append([curr[0].left,curr[1]+1])
+              if curr[0].right:
+                  q.append([curr[0].right,curr[1]+1])
+2.      LESS EFFICIENT O(N) SOLUTION
+  class Solution:
+    def minDepth(self, root):
+        #Code here
+        if not root:
+            return 0
+        if root.left is None and root.right is None:
+            return 1
+        left,right=10**5,10**5
+        if root.left:
+            left=Solution().minDepth(root.left)
+        if root.right:
+            right=Solution().minDepth(root.right)
+        return min(left,right)+1
