@@ -1,0 +1,42 @@
+1)    TUSHAR ROY UTUBE,MAX OF LST < ROOT AND MIN OF RST>ROOT, NARROWING THE LB AND UPPERBOUND,GFG
+  import sys
+  class Solution:
+      def checkBST(self,root,lb,ub):
+          if root is None:
+              return True
+
+
+          if lb<root.data and root.data<ub and Solution().checkBST(root.left,lb,root.data) and Solution().checkBST(root.right,root.data,ub):
+              return True
+          return False
+
+      #Function to check whether a Binary Tree is BST or not.
+      def isBST(self, root):
+          #code here
+          lb,ub=-sys.maxsize,sys.maxsize
+          return Solution().checkBST(root,lb,ub)
+  2) INORDER TRAVERSING AND CHECKING ,WITHOUT STORING IN ARRAY
+    class Solution:
+      prev=-10**7
+      #Function to check whether a Binary Tree is BST or not.
+      def check(self,root):
+          global prev
+          if root is None:
+              return True
+
+
+          left=Solution().check(root.left)
+
+          if root.data>prev:
+              prev=root.data
+          else:
+              return False
+          if left and Solution().check(root.right):
+              return True
+          return False
+
+      def isBST(self, root):
+          #code here
+          global prev
+          prev=-10**7
+          return Solution().check(root)
