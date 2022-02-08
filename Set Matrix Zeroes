@@ -1,0 +1,46 @@
+#My LeetCode Approach
+global a
+a=[]
+class Solution:
+    
+    def resetRow(self,a,i,m,n):
+       
+        for j in range(n):
+            if a[i][j]!=0:
+                a[i][j]='*'
+            else:
+                Solution().resetCol(a,j,m,n)
+        return a
+                
+    def resetCol(self,a,j,m,n):
+       
+        for i in range(m):
+            if a[i][j]!=0:
+                a[i][j]='*'
+        return a
+        
+    def doer(self,a,m,n):
+        
+        for i in range(m):
+            for j in range(n):
+                if a[i][j]==0:
+                    a=Solution().resetRow(a,i,m,n)
+                    a=Solution().resetCol(a,j,m,n)
+                    a[i][j]='*'
+                    break
+        return a
+    def transform(self,a,m,n):
+        for i in range(m):
+            for j in range(n):
+                if a[i][j]=='*':
+                    a[i][j]=0
+        return a
+        
+    def setZeroes(self,a: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        m=len(a)
+        n=len(a[0])
+        a=Solution().doer(a,m,n)
+        a=Solution().transform(a,m,n)
